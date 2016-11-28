@@ -84,13 +84,25 @@
 
 
 
+<meta name="description" content="#Xcode打包静态
+##一、静态库和动态库的区别：
+静态库和动态库是相对编译期和运行期的，静态库以 .a 和 .framework 形式存在，链接时，静态库会被完整地复制到可执行文件中，被多次使用就有多份冗余拷贝；动态库以 .dylib 和 .framework 形式存在，链接时不复制，程序运行时由系统动态加载到内存，供程序调用，系统只加载一次，多个程序共用，节省内存，一般只能由系统创建。
+##">
 <meta property="og:type" content="article">
-<meta property="og:title" content="test">
-<meta property="og:url" content="http://yoursite.com/2016/11/28/test/index.html">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2016/07/21/Xcode打包库文件/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:updated_time" content="2016-11-28T04:18:26.000Z">
+<meta property="og:description" content="#Xcode打包静态
+##一、静态库和动态库的区别：
+静态库和动态库是相对编译期和运行期的，静态库以 .a 和 .framework 形式存在，链接时，静态库会被完整地复制到可执行文件中，被多次使用就有多份冗余拷贝；动态库以 .dylib 和 .framework 形式存在，链接时不复制，程序运行时由系统动态加载到内存，供程序调用，系统只加载一次，多个程序共用，节省内存，一般只能由系统创建。
+##">
+<meta property="og:updated_time" content="2016-07-21T03:35:17.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="test">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="#Xcode打包静态
+##一、静态库和动态库的区别：
+静态库和动态库是相对编译期和运行期的，静态库以 .a 和 .framework 形式存在，链接时，静态库会被完整地复制到可执行文件中，被多次使用就有多份冗余拷贝；动态库以 .dylib 和 .framework 形式存在，链接时不复制，程序运行时由系统动态加载到内存，供程序调用，系统只加载一次，多个程序共用，节省内存，一般只能由系统创建。
+##">
 
 
 
@@ -118,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/11/28/test/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/07/21/Xcode打包库文件/"/>
 
 
 
 
 
-  <title> test | Hexo </title>
+  <title>  | Hexo </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="">
@@ -235,7 +247,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/28/test/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/21/Xcode打包库文件/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="John Doe">
@@ -259,7 +271,7 @@
             
             
               
-                test
+                
               
             
           </h1>
@@ -272,8 +284,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Veröffentlicht am</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-28T12:18:26+08:00">
-                2016-11-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-21T11:18:07+08:00">
+                2016-07-21
               </time>
             
 
@@ -308,7 +320,39 @@
       
 
       
-        
+        <p>#<a href="https://www.raywenderlich.com/41377/creating-a-static-library-in-ios-tutorial" target="_blank" rel="external">Xcode打包静态</a></p>
+<p>##一、静态库和动态库的区别：</p>
+<p>静态库和动态库是相对编译期和运行期的，静态库以 .a 和 .framework 形式存在，链接时，静态库会被完整地复制到可执行文件中，被多次使用就有多份冗余拷贝；动态库以 .dylib 和 .framework 形式存在，链接时不复制，程序运行时由系统动态加载到内存，供程序调用，系统只加载一次，多个程序共用，节省内存，一般只能由系统创建。</p>
+<p>##二、静态库简介：</p>
+<p>1、静态库分为真机—Debug（调试）版本、真机—Release（发布）版本、模拟器—Debug版本、模拟器—Release版本；开发中一般都打包Release（发布）版本，将真机和模拟器版本合并，提供外界。</p>
+<p>2、使用场景：在项目开发的过程中，例如两个公司之间业务交流，不可能把源代码都发送给另一个公司，这时候将私密内容打包成静态库，别人只能调用接口，而不能知道其中实现的细节。</p>
+<p>1.创建静态库工程 点击iOS—Framework&amp;—Cocoa Touch Static Library。</p>
+<p>2.修改 Product－&gt;Scheme-&gt; Edit Scheme下 为 Release </p>
+<pre><code>选择Edit Scheme，Build Configuration下选择Release，先注意检查下面    Release是否为NO：Yes表示只编译选中模拟器设备对应的架构，No则为编译所有模拟器设备支持的    cup架构（Debug版本同理）,选择NO，然后分别在模拟器和真机下Command+B编译一下，会看到    Products文件夹下的.a文件变为黑色，这个.a文件就是我们想要得到的静态库，这里会出现一个问题    你先编译的模拟器会发现.a依然是红色，你需要模拟器和真机都编译后.a才会变成黑色，这应该是    Xcode本身的问题。
+</code></pre><p>3.”Build Active Architecture Only” 设置为”NO”,”IOS Deployment Target” 设置为 “IOS 7.0” ,表示支持IOS7.0以上系统版本的编译</p>
+<p>4.查看静态库.a对处理器架构的支持，先cd到.a文件的路径下，命令行输入：lipo -info xxxxx.a</p>
+<p>5.合并真机和模拟器.a文件，在终端输入以下命令行：lipo -create  模拟器.a文件的路径 真机.a文件的路径 -output 合并后的保存路径 </p>
+<h2 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h2><p>关于静态库对CPU架构的支持，首先了解iOS设备CPU架构方面的知识，ARM是微处理器行业的一家知名企业，arm处理器以体积小和高性能的优势在嵌入式设备中广泛使用，几乎所有手机都是使用它的。</p>
+<p>模拟器：iphone4s~5 : i386 iphone5s~6plus : x86_64</p>
+<p>真机：iphone3gs~4s : armv7  iphone5~5c : armv7s （静态库只要支持了armv7，就可以跑在armv7s的架构上） iphone5s~6plus : arm64</p>
+<p>armv6, armv7, armv7s是ARM CPU的不同指令集，原则是向下兼容的。例如iPhone4S CPU支持armv7, 但它同时兼容armv6，只是使用armv6指令可能无法充分发挥它的特性。</p>
+<p>##xcode脚本</p>
+<pre><code># define output folder environment variable
+UNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-universal
+
+# Step 1. Build Device and Simulator versions
+xcodebuild -target ImageFilters ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos  BUILD_DIR=&quot;${BUILD_DIR}&quot; BUILD_ROOT=&quot;${BUILD_ROOT}&quot;
+xcodebuild -target ImageFilters -configuration ${CONFIGURATION} -sdk iphonesimulator -arch i386 BUILD_DIR=&quot;${BUILD_DIR}&quot; BUILD_ROOT=&quot;${BUILD_ROOT}&quot;
+
+# make sure the output directory exists
+mkdir -p &quot;${UNIVERSAL_OUTPUTFOLDER}&quot;
+
+# Step 2. Create universal binary file using lipo
+lipo -create -output &quot;${UNIVERSAL_OUTPUTFOLDER}/lib${PROJECT_NAME}.a&quot; &quot;${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}.a&quot; &quot;${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}.a&quot;
+
+# Last touch. copy the header files. Just for convenience
+cp -R &quot;${BUILD_DIR}/${CONFIGURATION}-iphoneos/include&quot; &quot;${UNIVERSAL_OUTPUTFOLDER}/&quot;
+</code></pre>
       
     </div>
 
@@ -330,22 +374,6 @@
     <footer class="post-footer">
       
 
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/11/28/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-          </div>
-        </div>
       
 
       
@@ -389,8 +417,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -401,7 +438,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">1</span>
               <span class="site-state-item-name">Artikel</span>
             </a>
           </div>
@@ -429,6 +466,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#注："><span class="nav-number">1.</span> <span class="nav-text">注：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
